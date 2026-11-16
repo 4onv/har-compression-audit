@@ -1,0 +1,249 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "Synthetic HAR Compression Audit demo",
+      "version": "1"
+    },
+    "entries": [
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/activity?cursor=first",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 42812,
+          "content": {
+            "size": 42812,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/activity?cursor=next",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 31440,
+          "content": {
+            "size": 31440,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/catalog",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Encoding",
+              "value": "br"
+            }
+          ],
+          "bodySize": 8730,
+          "content": {
+            "size": 58410,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/profile",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 1286,
+          "content": {
+            "size": 1286,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/settings",
+          "headers": []
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 587,
+          "content": {
+            "size": 587,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/activity",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": -1,
+          "content": {
+            "size": 42812,
+            "mimeType": "application/json"
+          },
+          "_fromCache": "disk"
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/catalog",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 304,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 0,
+          "content": {
+            "size": 0,
+            "mimeType": "application/json"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/app.js",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip, br"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "text/javascript"
+            },
+            {
+              "name": "Content-Encoding",
+              "value": "gzip"
+            }
+          ],
+          "bodySize": 27990,
+          "content": {
+            "size": 104590,
+            "mimeType": "text/javascript"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/permissions",
+          "headers": [
+            {
+              "name": "Accept-Encoding",
+              "value": "gzip;q=0, br;q=0"
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodySize": 2080,
+          "content": {
+            "size": 2080,
+            "mimeType": "application/json"
+          }
+        }
+      }
+    ]
+  }
+}

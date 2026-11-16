@@ -1,0 +1,30 @@
+{
+  "name": "@4onv/har-compression-audit",
+  "version": "0.1.0",
+  "description": "Audit JSON response compression and capture gaps from local HAR files.",
+  "type": "module",
+  "bin": {
+    "har-compression-audit": "bin/har-compression-audit.js"
+  },
+  "exports": "./src/audit.js",
+  "files": [
+    "bin",
+    "src/audit.js",
+    "examples",
+    "dist/har-compression-audit.html"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test test/audit.test.js test/cli.test.js",
+    "test:browser": "playwright test",
+    "check:package": "node scripts/check-package.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "repository": "github:4onv/har-compression-audit"
+}

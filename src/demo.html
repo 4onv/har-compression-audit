@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="__CSP__">
+<title>HAR Compression Audit</title>
+<style>__CSS__</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>HAR Compression Audit</h1>
+    <p>Find JSON responses that arrived uncompressed when the client offered compression.</p>
+  </header>
+  <section class="controls" aria-label="Capture controls">
+    <div>
+      <label class="upload">Open a HAR file <input type="file" id="capture" accept=".har,.json,application/json"></label>
+      <button type="button" id="sample">Load synthetic example</button>
+    </div>
+    <label class="paths"><input type="checkbox" id="paths"> Reveal origins and paths</label>
+    <p class="hint">Files stay in this browser. Revealed paths can contain sensitive values.</p>
+  </section>
+  <p class="status" id="status" role="status"></p>
+  <dl class="metrics" id="metrics"></dl>
+  <section class="panel" aria-labelledby="routes-title">
+    <h2 id="routes-title">Routes by uncompressed body size</h2>
+    <p class="hint" id="route-count"></p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Route table">
+      <table>
+        <thead><tr>
+          <th scope="col">Route</th><th scope="col">First HAR entry</th><th scope="col">Identity</th>
+          <th scope="col">Recorded body bytes</th><th scope="col">Compressed</th><th scope="col">Unknown</th>
+        </tr></thead>
+        <tbody id="routes"></tbody>
+      </table>
+    </div>
+  </section>
+  <details class="panel">
+    <summary>Evidence and exclusions</summary>
+    <p class="hint">Identity means compression was offered and the JSON response was returned without it. Byte counts come from HAR body sizes. Unknown results signal gaps or ambiguity in the capture.</p>
+    <dl class="evidence" id="evidence"></dl>
+  </details>
+  <noscript>The audit needs JavaScript to process the capture locally.</noscript>
+</main>
+<script>__JS__</script>
+</body>
+</html>
