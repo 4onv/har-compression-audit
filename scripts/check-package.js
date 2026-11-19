@@ -25,6 +25,10 @@ try {
   assert.equal(version.trim(), info.version);
   const demo = run([npm, 'exec', '--offline', '--', 'har-compression-audit', 'demo', '--json']);
   assert.equal(JSON.parse(demo).summary.identityBytes, 75_538);
+  const fixture = join(root, 'examples', 'synthetic.har.json');
+  const compare = run([npm, 'exec', '--offline', '--', 'har-compression-audit', 'compare', fixture, fixture, '--json']);
+  assert.equal(JSON.parse(compare).recordedIdentityBytesChange, 0);
+  assert.equal(JSON.parse(compare).identityCoverage, 'incomplete');
   const exportsCheck = "import { auditHar } from '@4onv/har-compression-audit';" +
     "if (auditHar({ log: { entries: [] } }).summary.entries !== 0) process.exit(1);";
   run(['--input-type=module', '--eval', exportsCheck]);

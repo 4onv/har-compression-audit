@@ -162,6 +162,22 @@ export function checkBudget(summary, maxIdentityBytes) {
   return 'within';
 }
 
+/** Compare captured totals. Route IDs are local to each capture and cannot be joined. */
+export function compareHar(beforeHar, afterHar) {
+  const before = auditHar(beforeHar).summary;
+  const after = auditHar(afterHar).summary;
+  const complete = summary =>
+    summary.unknown === 0 && summary.identityUnmeasured === 0 &&
+    summary.identity + summary.compressed > 0;
+  return {
+    version: 1,
+    before,
+    after,
+    identityCoverage: complete(before) && complete(after) ? 'complete' : 'incomplete',
+    recordedIdentityBytesChange: after.identityBytes - before.identityBytes,
+  };
+}
+
 export function parseHar(bytes) {
   if (bytes.byteLength > maxInputBytes) throw new Error('HAR input exceeds 16 MiB.');
   try {

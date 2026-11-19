@@ -13,7 +13,7 @@ In your browser’s Network panel, save a HAR while reproducing the affected req
 The CLI requires Node.js 22 or later. Download the package archive from the release. The resulting command has no runtime dependencies. [Download the package archive and checksums](https://github.com/4onv/har-compression-audit/releases/latest)
 
 ```sh
-npm install --global ./4onv-har-compression-audit-0.1.0.tgz
+npm install --global ./4onv-har-compression-audit-0.2.0.tgz
 har-compression-audit demo
 har-compression-audit check session.har
 har-compression-audit check session.har --json
@@ -34,6 +34,16 @@ har-compression-audit check session.har --max-identity-bytes 50000 --json
 | 2 | Evidence is incomplete, no relevant responses were observed, or the input is invalid. |
 
 Without a budget, a valid audit exits with 0 and exposes unknown entries in the report. In JSON, `summary.identityUnmeasured` counts identity responses whose recorded transfer size is unavailable. `reasons` breaks down exclusions and unknowns. `routes` contains all route groups. The terminal summary lists the top 20, and the HTML shows up to 100.
+
+## Compare two captures
+
+```sh
+har-compression-audit compare before.har after.har --max-identity-increase 0 --json
+```
+
+Capture the same workload before and after a change. The comparison reports aggregate byte totals, response counts and measurement gaps without including URLs. A negative `recordedIdentityBytesChange` means the second capture recorded fewer identity body bytes. This total can also change with traffic volume, payload size or cache behavior.
+
+The optional increase budget exits 1 above its limit, 0 at or below it with complete identity size coverage, or 2 if either capture has unknown responses, missing identity sizes or no relevant traffic. Without a budget, a valid comparison exits 0 and reports the coverage status.
 
 ## What the audit measures
 

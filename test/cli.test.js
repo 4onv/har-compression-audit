@@ -12,6 +12,34 @@ const run = (...args) => spawnSync(process.execPath, [cli, ...args], {
   encoding: 'utf8', timeout: 8000, windowsHide: true,
 });
 
+test('capture comparison preserves unknowns, avoids URL output, and gates measured increases', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'har-audit-compare-'));
+  const before = join(dir, 'before.har');
+  const after = join(dir, 'after.har');
+  const capture = bodySize => JSON.stringify({ log: { entries: [{
+    request: { method: 'GET', url: 'https://private.example.invalid/secret?token=private',
+      headers: [{ name: 'Accept-Encoding', value: 'gzip' }] },
+    response: { status: 200, bodySize, headers: [{ name: 'Content-Type', value: 'application/json' }],
+      content: { mimeType: 'application/json', size: bodySize === -1 ? 50 : bodySize } },
+  }] } });
+  try {
+    await writeFile(before, capture(50));
+    await writeFile(after, capture(60));
+    const fail = run('compare', before, after, '--json', '--max-identity-increase', '9');
+    assert.equal(fail.status, 1, fail.stderr);
+    assert.equal(JSON.parse(fail.stdout).recordedIdentityBytesChange, 10);
+    assert.doesNotMatch(fail.stdout, /private|secret/u);
+    assert.equal(run('compare', before, after, '--max-identity-increase', '10').status, 0);
+    await writeFile(before, capture(-1));
+    const unknown = run('compare', before, after, '--json', '--max-identity-increase', '100');
+    assert.equal(unknown.status, 2, unknown.stderr);
+    assert.equal(JSON.parse(unknown.stdout).budget.status, 'inconclusive');
+    assert.equal(JSON.parse(unknown.stdout).before.identityUnmeasured, 1);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
 test('demo labels invented data and outputs complete private JSON', () => {
   const demo = run('demo');
   assert.equal(demo.status, 0, demo.stderr);
